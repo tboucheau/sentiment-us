@@ -12,7 +12,7 @@ const IndexPage = () => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('https://nnbgvwnxn1.execute-api.eu-central-1.amazonaws.com/fr/sentiment-analysis', { data: inputValue });
+      const response = await axios.post('https://nnbgvwnxn1.execute-api.eu-central-1.amazonaws.com/us/sentiment-analysis', { data: inputValue });
       setResponseData(response.data);
     } catch (error) {
       setError(error);
@@ -27,16 +27,16 @@ const handleKeyDown = (event) => {
 
   return (
     <div className="container">
-      <h1 className="mt-5">Ecrivez ce que vous voulez</h1>
-	<p>l'IA vous dira si de que vous dites est positif ou négatif !! (valider avec la touche ↩️</p>
+      <h1 className="mt-5">Shout something you think</h1>
+	<p>AI will tell you if it's positive or negative !! (validate with ↩️ key)</p>
       <div className="input-group mb-3">
-        <input type="text" className="form-control" placeholder="Saisissez vos données" value={inputValue} onChange={handleChange} onKeyDown={handleKeyDown} />
+        <input type="text" className="form-control" placeholder="Type your text" value={inputValue} onChange={handleChange} onKeyDown={handleKeyDown} />
       </div>
       {responseData && (
 <div className="alert alert-info" role="alert">
-Ce que vous dites est {JSON.stringify(responseData, null, 2) === "\"NEGATIVE\"" ? "négatif 😥 !" : 
-   JSON.stringify(responseData, null, 2) === "\"POSITIVE\"" ? "positif 😃 !" :
-   JSON.stringify(responseData, null, 2) === "\"NEUTRAL\"" ? "neutre 😐 !" : "inconnu"}</div>
+What you say is {JSON.stringify(responseData, null, 2) === "\"NEGATIVE\"" ? "negative 😥 !" : 
+   JSON.stringify(responseData, null, 2) === "\"POSITIVE\"" ? "positive 😃 !" :
+   JSON.stringify(responseData, null, 2) === "\"NEUTRAL\"" ? "neutral 😐 !" : "inconnu"}</div>
       )}
       {error && <div className="alert alert-danger" role="alert">Error: {error.message}</div>}
     </div>
